@@ -3,15 +3,9 @@
 [![Maven Central](https://img.shields.io/maven-central/v/com.github.seratch/deepl-jvm.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.github.seratch%22%20AND%20a:%22deepl-jvm%22)
 [![CI Build](https://github.com/seratch/deepl-jvm/actions/workflows/ci-build.yml/badge.svg)](https://github.com/seratch/deepl-jvm/actions/workflows/ci-build.yml)
 
-Here is a [DeepL API](https://www.deepl.com/docs-api) SDK for any JVM language users :wave: 
+Here is s a nice [DeepL API](https://www.deepl.com/docs-api) client library written in Kotlin!
+The supported Java runtimes are any [OpenJDK](https://openjdk.java.net/) distributions and [Android runtime](https://developer.android.com/).
 
-This project aims to provide a DeepL API client for any JVM language developers without hurdles.
-To realize the goal, its code is written in Kotlin with a nice consideration for Java compatibility.
-
-This SDK works on [Android runtime](https://developer.android.com/) and any distributions based on [OpenJDK](https://openjdk.java.net/).
-With regard to programming languages, this project provides out-of-the-box supports for Java (of course!) and [Kotlin](https://kotlinlang.org/).
-We don't have nice wrappers for some other JVM languages such as [Scala](https://www.scala-lang.org/), [Groovy](https://groovy-lang.org/), and [Clojure](https://clojure.org/), but your code using this library should work in the languages too.
-``
 ### Getting Started
 
 You can start using this library just by adding `deepl-jvm` dependency to your project.
@@ -21,7 +15,6 @@ For Gradle users:
 ```gradle
 ext.DeepLSDKVersion = "0.1.0"
 dependencies {
-  // This dependency is at least required
   implementation("com.github.seratch:deepl-jvm:${DeepLSDKVersion}")
 }
 ```
@@ -42,7 +35,7 @@ For Maven users:
 </dependencies>
 ```
 
-As this library is in Kotlin, using in the same language is the smoothest :) Let's start with the following code, which manipulates DeepL pages :wave:
+As this library is in Kotlin, using in the same language is the smoothest :) Let's start with the following code :wave:
 
 ```kotlin
 package integration_tests
@@ -66,22 +59,20 @@ fun main() {
 
     // -----------------------------
     // Text translation
-    val translation =
-      client.translate(
-        text = "こんにちは！私は元気です :wave:",
-        targetLang = TargetLanguage.AmericanEnglish,
-      )
+    val translation = client.translate(
+      text = "こんにちは！私は元気です :wave:",
+      targetLang = TargetLanguage.AmericanEnglish,
+    )
     println(translation.translations[0].text)
     assertEquals("Hello! I am fine :wave:", translation.translations[0].text)
 
     // -----------------------------
     // Document translation
-    val uploadedDocument =
-      client.uploadDocument(
-        file = File("source.docx"),
-        filename = "source.docx",
-        targetLang = TargetLanguage.Japanese,
-      )
+    val uploadedDocument = client.uploadDocument(
+      file = File("source.docx"),
+      filename = "source.docx",
+      targetLang = TargetLanguage.Japanese,
+    )
     assertNotNull(uploadedDocument.documentId)
     assertNotNull(uploadedDocument.documentKey)
 
@@ -130,7 +121,8 @@ fun main() {
 
 #### Using in Java
 
-Even when you use this SDK in Java and other languages, all the classes/methods should be accessible. If you find issues, please let us know the issue in [this project's issue tracker](https://github.com/seratch/deepl-jvm/issues).
+Even when you use this SDK in Java and other languages, all the classes/methods should be accessible.
+If you find issues, please let us know in [this project's issue tracker](https://github.com/seratch/deepl-jvm/issues).
 
 ```java
 import deepl.api.v2.DeepLClient;
