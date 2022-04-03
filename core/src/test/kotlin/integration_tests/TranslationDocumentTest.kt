@@ -34,7 +34,10 @@ class TranslationDocumentTest {
         if (res.status == DocumentStatus.Done || res.status == DocumentStatus.Error) {
           break
         }
-        Thread.sleep(500L)
+        val remainingSeconds: Double =
+            if (res.secondsRemaining != null) res.secondsRemaining!!.toDouble() else 0.0
+        val secondsToSleep = 1.0.coerceAtLeast((remainingSeconds / 2.0).coerceAtMost(60.0))
+        Thread.sleep(secondsToSleep.toLong())
       }
 
       val fileData =

@@ -6,5 +6,6 @@ open class DocumentStatusResponse
 constructor(
     val documentId: String,
     val status: DocumentStatus,
-    val secondsRemaining: Int,
+    val secondsRemaining: Int?,
+    val billedCharacters: Int?,
 )

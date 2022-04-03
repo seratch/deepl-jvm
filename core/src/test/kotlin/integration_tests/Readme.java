@@ -60,7 +60,12 @@ public class Readme {
                 if (res.getStatus() == DocumentStatus.Done.Done || res.getStatus() == DocumentStatus.Error) {
                     break;
                 }
-                Thread.sleep(500L);
+                Double remainingSeconds = 0.0D;
+                if (res.getSecondsRemaining() != null) {
+                    remainingSeconds = res.getSecondsRemaining().doubleValue();
+                }
+                Double secondsToSleep = Math.max(1.0, Math.min(remainingSeconds, 60.0));
+                Thread.sleep(secondsToSleep.longValue());
             }
 
             byte[] resultFileContentBytes = client.downloadDocument(
