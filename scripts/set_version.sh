@@ -11,19 +11,19 @@ find . -name pom.xml | xargs gsed -i "s/<version>[0-9]\+\.[0-9]\+\.[^S]\+<\/vers
 find . -name pom.xml | xargs gsed -i "s/<version>[0-9]\+\.[0-9]\+\.[^S]\+-SNAPSHOT<\/version>/<version>${new_version}<\/version>/g"
 
 if [[ "$new_version" != *-SNAPSHOT ]]; then
-  gsed -i "s/<notion-sdk.version>[0-9]\+\.[0-9]\+\.[^S]\+<\/notion-sdk.version>/<notion-sdk.version>${new_version}<\/notion-sdk.version>/g" README.md
-  gsed -i "s/notionSdkVersion = \"[0-9]\+\.[0-9]\+\.[^S]\+\"/notionSdkVersion = \"${new_version}\"/g" README.md
+  gsed -i "s/<deepl-sdk.version>[0-9]\+\.[0-9]\+\.[^S]\+<\/deepl-sdk.version>/<deepl-sdk.version>${new_version}<\/deepl-sdk.version>/g" README.md
+  gsed -i "s/DeepLSDKVersion = \"[0-9]\+\.[0-9]\+\.[^S]\+\"/DeepLSDKVersion = \"${new_version}\"/g" README.md
 fi
 
-echo "package notion.api
+echo "package deepl.api
 
 object Metadata {
   const val VERSION: String = \"$new_version\"
 
   fun isLibraryMaintainerMode(): Boolean {
-    val value = System.getenv(\"NOTION_SDK_JVM_LIBRARY_MAINTAINER_MODE\")
+    val value = System.getenv(\"DEEPL_SDK_JVM_LIBRARY_MAINTAINER_MODE\")
     return value != null && ((value == \"1\") or (value == \"true\"))
   }
-}" > core/src/main/kotlin/notion/api/Metadata.kt
+}" > core/src/main/kotlin/deepl/api/Metadata.kt
 
 git diff
