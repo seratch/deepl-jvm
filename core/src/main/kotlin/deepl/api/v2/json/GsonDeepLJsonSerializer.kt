@@ -5,6 +5,7 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import deepl.api.Metadata.isLibraryMaintainerMode
 import deepl.api.v2.json.gson.GsonUnknownFieldDetection
+import deepl.api.v2.model.common.DeepLError
 import deepl.api.v2.response.glossaries.GlossariesResponse
 import deepl.api.v2.response.glossaries.GlossaryCreationResponse
 import deepl.api.v2.response.glossaries.GlossaryLanguagePairsResponse
@@ -55,4 +56,6 @@ class GsonDeepLJsonSerializer : DeepLJsonSerializer {
 
   override fun toCreateGlossaryResponse(body: String): GlossaryCreationResponse =
       gson.fromJson(body, GlossaryCreationResponse::class.java)
+
+  override fun toError(body: String): DeepLError = gson.fromJson(body, DeepLError::class.java)
 }

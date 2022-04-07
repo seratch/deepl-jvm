@@ -1,6 +1,6 @@
 package deepl.api.v2.request.glossaries
 
-import deepl.api.v2.misc.InternalUtility.urlEncode
+import deepl.api.misc.InternalUtility.urlEncode
 import deepl.api.v2.model.glossaries.EntriesFormat
 import deepl.api.v2.model.glossaries.GlossarySourceLanguage
 import deepl.api.v2.model.glossaries.GlossaryTargetLanguage

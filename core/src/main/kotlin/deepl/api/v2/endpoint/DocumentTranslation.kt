@@ -1,10 +1,10 @@
 package deepl.api.v2.endpoint
 
-import deepl.api.v2.exception.DeepLAPIError
+import deepl.api.misc.InternalUtility.urlEncode
+import deepl.api.v2.exception.DeepLException
 import deepl.api.v2.http.DeepLHttpClient
 import deepl.api.v2.json.DeepLJsonSerializer
 import deepl.api.v2.logging.DeepLLogger
-import deepl.api.v2.misc.InternalUtility.urlEncode
 import deepl.api.v2.model.translation.Formality
 import deepl.api.v2.model.translation.SourceLanguage
 import deepl.api.v2.model.translation.TargetLanguage
@@ -72,7 +72,7 @@ interface DocumentTranslation : Endpoint {
     if (httpResponse.status == 200) {
       return jsonSerializer.toUploadDocumentResponse(httpResponse.textBody())
     } else {
-      throw DeepLAPIError(httpResponse = httpResponse)
+      throw DeepLException(httpResponse = httpResponse, jsonSerializer = jsonSerializer)
     }
   }
 
@@ -98,7 +98,7 @@ interface DocumentTranslation : Endpoint {
     if (httpResponse.status == 200) {
       return jsonSerializer.toGetDocumentStatusResponse(httpResponse.textBody())
     } else {
-      throw DeepLAPIError(httpResponse = httpResponse)
+      throw DeepLException(httpResponse = httpResponse, jsonSerializer = jsonSerializer)
     }
   }
 
@@ -124,7 +124,7 @@ interface DocumentTranslation : Endpoint {
     if (httpResponse.status == 200) {
       return httpResponse.binaryBody
     } else {
-      throw DeepLAPIError(httpResponse = httpResponse)
+      throw DeepLException(httpResponse = httpResponse, jsonSerializer = jsonSerializer)
     }
   }
 }

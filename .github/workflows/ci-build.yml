@@ -25,6 +25,16 @@ jobs:
       - name: Check the code format
         run: |
           mvn spotless:check
+      - name: Start deepl-mock server
+        run: |
+          git clone git@github.com:DeepLcom/deepl-mock.git
+          cd deepl-mock/
+          sed -i '' 's/RUN npm audit//' Dockerfile
+          docker image build -t deepl/deepl-mock .
+          docker run -d --rm --name deepl-mock -p3000:3000 -p3001:3001 deepl/deepl-mock
       - name: Compile the main/test code
         run: |
           mvn test-compile --no-transfer-progress -DfailIfNoTests=false '-Dtest=tests.**.*Test' test
+      - name: Stop deepl-mock server
+        run: |
+          docker stop deepl/deepl-mock

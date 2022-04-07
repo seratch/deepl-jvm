@@ -1,5 +1,6 @@
 package deepl.api.v2.json
 
+import deepl.api.v2.model.common.DeepLError
 import deepl.api.v2.response.glossaries.GlossariesResponse
 import deepl.api.v2.response.glossaries.GlossaryCreationResponse
 import deepl.api.v2.response.glossaries.GlossaryLanguagePairsResponse
@@ -20,4 +21,5 @@ interface DeepLJsonSerializer {
   fun toListGlossariesResponse(body: String): GlossariesResponse
   fun toGetGlossaryResponse(body: String): GlossaryResponse
   fun toCreateGlossaryResponse(body: String): GlossaryCreationResponse
+  fun toError(body: String): DeepLError
 }

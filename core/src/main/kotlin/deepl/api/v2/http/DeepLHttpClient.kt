@@ -1,7 +1,7 @@
 package deepl.api.v2.http
 
+import deepl.api.misc.InternalUtility.urlEncode
 import deepl.api.v2.logging.DeepLLogger
-import deepl.api.v2.misc.InternalUtility.urlEncode
 import java.io.Closeable
 
 interface DeepLHttpClient : AutoCloseable, Closeable {

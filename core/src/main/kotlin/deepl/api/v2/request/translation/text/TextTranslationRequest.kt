@@ -1,6 +1,6 @@
 package deepl.api.v2.request.translation.text
 
-import deepl.api.v2.misc.InternalUtility.urlEncode
+import deepl.api.misc.InternalUtility.urlEncode
 import deepl.api.v2.model.translation.Formality
 import deepl.api.v2.model.translation.SourceLanguage
 import deepl.api.v2.model.translation.TargetLanguage

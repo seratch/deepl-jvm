@@ -1,6 +1,6 @@
 package deepl.api.v2.endpoint
 
-import deepl.api.v2.exception.DeepLAPIError
+import deepl.api.v2.exception.DeepLException
 import deepl.api.v2.http.DeepLHttpClient
 import deepl.api.v2.json.DeepLJsonSerializer
 import deepl.api.v2.logging.DeepLLogger
@@ -93,7 +93,7 @@ interface TextTranslation : Endpoint {
     if (httpResponse.status == 200) {
       return jsonSerializer.toTextTranslationResponse(httpResponse.textBody())
     } else {
-      throw DeepLAPIError(httpResponse = httpResponse)
+      throw DeepLException(httpResponse = httpResponse, jsonSerializer = jsonSerializer)
     }
   }
 }

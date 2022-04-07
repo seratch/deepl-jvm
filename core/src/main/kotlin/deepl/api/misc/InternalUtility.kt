@@ -1,4 +1,4 @@
-package deepl.api.v2.misc
+package deepl.api.misc
 
 import java.net.URLEncoder
 

@@ -1,6 +1,6 @@
 package deepl.api.v2.request.translation.document
 
-import deepl.api.v2.misc.InternalUtility.urlEncode
+import deepl.api.misc.InternalUtility.urlEncode
 
 open class DocumentDownloadRequest
 constructor(

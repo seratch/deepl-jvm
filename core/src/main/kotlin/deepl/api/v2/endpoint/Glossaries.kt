@@ -1,10 +1,10 @@
 package deepl.api.v2.endpoint
 
-import deepl.api.v2.exception.DeepLAPIError
+import deepl.api.misc.InternalUtility.urlEncode
+import deepl.api.v2.exception.DeepLException
 import deepl.api.v2.http.DeepLHttpClient
 import deepl.api.v2.json.DeepLJsonSerializer
 import deepl.api.v2.logging.DeepLLogger
-import deepl.api.v2.misc.InternalUtility.urlEncode
 import deepl.api.v2.model.glossaries.EntriesFormat
 import deepl.api.v2.model.glossaries.GlossarySourceLanguage
 import deepl.api.v2.model.glossaries.GlossaryTargetLanguage
@@ -30,7 +30,7 @@ interface Glossaries : Endpoint {
     if (httpResponse.status == 200) {
       return jsonSerializer.toGlossaryLanguagePairResponse(httpResponse.textBody())
     } else {
-      throw DeepLAPIError(httpResponse = httpResponse)
+      throw DeepLException(httpResponse = httpResponse, jsonSerializer = jsonSerializer)
     }
   }
 
@@ -46,7 +46,7 @@ interface Glossaries : Endpoint {
     if (httpResponse.status == 200) {
       return jsonSerializer.toListGlossariesResponse(httpResponse.textBody())
     } else {
-      throw DeepLAPIError(httpResponse = httpResponse)
+      throw DeepLException(httpResponse = httpResponse, jsonSerializer = jsonSerializer)
     }
   }
 
@@ -64,7 +64,7 @@ interface Glossaries : Endpoint {
     if (httpResponse.status == 200) {
       return jsonSerializer.toGetGlossaryResponse("""{"glossary": ${httpResponse.textBody()}}""")
     } else {
-      throw DeepLAPIError(httpResponse = httpResponse)
+      throw DeepLException(httpResponse = httpResponse, jsonSerializer = jsonSerializer)
     }
   }
 
@@ -87,7 +87,7 @@ interface Glossaries : Endpoint {
                 elements[0] to elements[1]
               })
     } else {
-      throw DeepLAPIError(httpResponse = httpResponse)
+      throw DeepLException(httpResponse = httpResponse, jsonSerializer = jsonSerializer)
     }
   }
 
@@ -119,7 +119,7 @@ interface Glossaries : Endpoint {
     if (httpResponse.status == 201) {
       return jsonSerializer.toCreateGlossaryResponse("""{"glossary": ${httpResponse.textBody()}}""")
     } else {
-      throw DeepLAPIError(httpResponse = httpResponse)
+      throw DeepLException(httpResponse = httpResponse, jsonSerializer = jsonSerializer)
     }
   }
 
@@ -137,7 +137,7 @@ interface Glossaries : Endpoint {
     if (httpResponse.status == 204) {
       return GlossaryDeletionResponse()
     } else {
-      throw DeepLAPIError(httpResponse = httpResponse)
+      throw DeepLException(httpResponse = httpResponse, jsonSerializer = jsonSerializer)
     }
   }
 }
