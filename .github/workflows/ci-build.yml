@@ -17,24 +17,30 @@ jobs:
         java-version: [ '11', '14' ]
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Install JDK
         uses: actions/setup-java@v1
         with:
           java-version: ${{ matrix.java-version }}
+      - name: Checkout deepl-mock repo
+        uses: actions/checkout@v3
+        with:
+          repository: DeepLcom/deepl-mock
+          path: 'deepl-mock'
+      - name: Start deepl-mock server
+        run: |
+          ls
+          cd deepl-mock/
+          sed -i 's/RUN npm audit//' Dockerfile
+          docker image build -t deepl/deepl-mock .
+          docker run -d --rm --name deepl-mock -p3000:3000 -p3001:3001 deepl/deepl-mock
       - name: Check the code format
         run: |
           mvn spotless:check
-      - name: Start deepl-mock server
-        run: |
-          git clone git@github.com:DeepLcom/deepl-mock.git
-          cd deepl-mock/
-          sed -i '' 's/RUN npm audit//' Dockerfile
-          docker image build -t deepl/deepl-mock .
-          docker run -d --rm --name deepl-mock -p3000:3000 -p3001:3001 deepl/deepl-mock
       - name: Compile the main/test code
         run: |
+          export DEEPL_AUTH_KEY=not-a-real-one
           mvn test-compile --no-transfer-progress -DfailIfNoTests=false '-Dtest=tests.**.*Test' test
       - name: Stop deepl-mock server
         run: |
-          docker stop deepl/deepl-mock
+          docker stop `docker ps | grep deepl/deepl-mock | awk '{print $1}'`
