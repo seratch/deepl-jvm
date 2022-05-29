@@ -13,7 +13,7 @@ You can start using this library just by adding `deepl-jvm` dependency to your p
 For Gradle users:
 
 ```gradle
-ext.DeepLSDKVersion = "0.1.3"
+ext.DeepLSDKVersion = "0.1.4"
 dependencies {
   implementation("com.github.seratch:deepl-jvm:${DeepLSDKVersion}")
 }
@@ -23,7 +23,7 @@ For Maven users:
 
 ```xml
 <properties>
-  <deepl-sdk.version>0.1.3</deepl-sdk.version>
+  <deepl-sdk.version>0.1.4</deepl-sdk.version>
 </properties>
 
 <dependencies>
