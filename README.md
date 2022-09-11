@@ -1,9 +1,9 @@
 # DeepL Kotlin/JavaVM Library
 
->**Importatnt Notice**
+>**⚠️ Importatnt Notice ⚠️**
 >
 >DeepL team started developing their official Java SDK (https://github.com/DeepLcom/deepl-java).
->Once the 1st party SDK is GAed, this project will be archived.
+>We recommend uinsg the official one instead.
 
 [![Maven Central](https://img.shields.io/maven-central/v/com.github.seratch/deepl-jvm.svg?label=Maven%20Central)](https://search.maven.org/search?q=g:%22com.github.seratch%22%20AND%20a:%22deepl-jvm%22)
 [![CI Build](https://github.com/seratch/deepl-jvm/actions/workflows/ci-build.yml/badge.svg)](https://github.com/seratch/deepl-jvm/actions/workflows/ci-build.yml)
